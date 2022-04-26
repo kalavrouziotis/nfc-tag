@@ -1,0 +1,80 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>{{ title }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <!-- <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">{{ title }}</ion-title>
+    </ion-toolbar>
+  </ion-header> -->
+
+  <div id="container">
+    <!-- Scan home container -->
+    <ng-container *ngIf="!scanning && !errorOccured && !successOccured">
+      <div class="main-img-container">
+        <img src="assets/images/pablo-searching.png" alt="" />
+      </div>
+      <div class="content-container">
+        <div class="title">Εντοπισμός βραχιολιού</div>
+        <div class="description">
+          Ξεκινήστε τον εντοπισμό του έξυπνου βραχιολιού, για να προχωρήσετε
+          στην διαδικασία διαμόρφωσης και διαγραφής του μοναδικού αναγνωριστικού
+          κωδικού.
+        </div>
+      </div>
+      <div class="actions-container">
+        <div class="action" (click)="startScan()">Εντοπισμός</div>
+      </div>
+    </ng-container>
+
+    <!-- Scanning on process -->
+    <ng-container *ngIf="scanning && !errorOccured && !successOccured">
+      <div class="scanning-container">
+        <div class="sk-pulse sk-center"></div>
+        <div class="scanning-title">Γίνεται εντοπισμός</div>
+        <div class="scanning-description">
+          Παρακαλώ πλησιάστε την συσκευή σας,<br />κοντά στο έξυπνο βραχιόλι.
+        </div>
+        <div class="cancel-action" (click)="stopScan()">Ακύρωση</div>
+      </div>
+    </ng-container>
+
+    <!-- Success occured -->
+    <ng-container *ngIf="!scanning && !errorOccured && successOccured">
+      <div class="main-img-container">
+        <img src="assets/images/pablo-success-2.png" alt="" />
+      </div>
+      <div class="content-container">
+        <div class="title">Επιτυχής διαγραφή</div>
+        <div class="description">
+          Πραγματοποιήθηκε διαμόρφωση του έξυπνου βραχιολιού και ο μοναδικός
+          αναγνωριστικός κωδικός διαγράφηκε.
+        </div>
+        <div class="return-action" (click)="returnBack()">Επιστροφή</div>
+      </div>
+    </ng-container>
+
+    <!-- Error occured -->
+    <ng-container *ngIf="!scanning && errorOccured && !successOccured">
+      <div class="main-img-container">
+        <img src="assets/images/pablo-phone-call.png" alt="" />
+      </div>
+      <div class="content-container">
+        <div class="title">Κάτι πήγε στραβά</div>
+        <div class="description">
+          Δοκιμάστε εκ νέου τον εντοπισμό του έξυπνου βραχιολιού για να
+          πραγματοποιήσετε διαμόρφωση.
+        </div>
+      </div>
+      <div class="actions-container">
+        <div class="action" (click)="startScan()">Εντοπισμός</div>
+      </div>
+    </ng-container>
+  </div>
+</ion-content>
